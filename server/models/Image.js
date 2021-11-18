@@ -3,9 +3,9 @@ module.exports = (sequelize, DataTypes) => {
     const Image = sequelize.define("Image", {
         file: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         }
-    })
+    });
 
-    return Image
+    return Image;
 }

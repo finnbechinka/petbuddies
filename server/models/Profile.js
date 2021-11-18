@@ -32,9 +32,13 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Profile.assotiate = (models) => {
-        Profile.hasMany(models.Image, { onDelete: "cascade" } );
-        Profile.belongsTo(models.Image, { as: 'ProfilePicture', constrains: false } );
-        Profile.hasMany(models.BuddiePreference, { onDelete: "cascade"} );
+        Profile.hasMany(models.Image, { onDelete: 'cascade' } );
+        Profile.belongsTo(models.Image, { as: 'profile_picture', constrains: false } );
+        Profile.hasMany(models.BuddyPreference, { onDelete: 'cascade'} );
+        Profile.hasMany(models.Message, { onDelete: 'cascade'});
+        Profile.belongsTo(models.Message, { as: 'recipient_profile_id'});
+        Profile.hasMany(models.BuddyList, { onDelete: 'cascade'});
+        Profile.belongsTo(models.BuddyPreference, { as: 'buddie', onDelete: 'cascade'});
     };
 
     return Profile;
