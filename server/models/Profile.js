@@ -2,23 +2,40 @@ module.exports = (sequelize, DataTypes) => {
 
     const Profile = sequelize.define("Profile", {
         // sprache in welcher das profil verfasst ist
-        sprache: {
+        language: {
             type: DataTypes.STRING,
-            allowNull: false, 
+            allowNull: false
         },
-        // beinhaltet die image id aus dem image table
-        profile_img: {
-            type: DataTypes.INT,
-            allowNull: true,
-        },
-        beschreibung: {
+        description: {
             type: DataTypes.STRING(2000),
-            allowNull: true,
+            allowNull: true
+        },
+        species: {
+            // z.b.: Hund
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        type: {
+            // z.b.: Bulldogge
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        age: {
+            type: DataTypes.INT,
+            allowNull: true
+        },
+        disposition: {
+            // gemuet
+            type: DataTypes.STRING,
+            allowNull: false
         }
+    });
 
-        // TODO: Braucht noch merkmale, aber format noch nicht bekannt
-        // TODO: Braucht noch praeferenzen, aber format nocht nicht bekannt, vllt so wie merkmale?
-    })
+    Profile.assotiate = (models) => {
+        Profile.hasMany(models.Image, { onDelete: "cascade" } );
+        Profile.belongsTo(models.Image, { as: 'ProfilePicture', constrains: false } );
+        Profile.hasMany(models.BuddiePreference, { onDelete: "cascade"} );
+    };
 
-    return Profile
+    return Profile;
 }
