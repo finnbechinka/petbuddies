@@ -7,5 +7,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
+    Message.associate = (models) => {
+        Message.belongsTo(models.Profile, { as: 'recipient' });
+    };
+
     return Message;
-}
+};

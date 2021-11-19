@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         },
         age: {
-            type: DataTypes.INT,
+            type: DataTypes.INTEGER,
             allowNull: true
         },
         disposition: {
@@ -31,15 +31,17 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
 
-    Profile.assotiate = (models) => {
-        Profile.hasMany(models.Image, { onDelete: 'cascade' } );
-        Profile.belongsTo(models.Image, { as: 'profile_picture', constrains: false } );
-        Profile.hasMany(models.BuddyPreference, { onDelete: 'cascade'} );
-        Profile.hasMany(models.Message, { onDelete: 'cascade'});
-        Profile.belongsTo(models.Message, { as: 'recipient_profile_id'});
-        Profile.hasMany(models.BuddyList, { onDelete: 'cascade'});
-        Profile.belongsTo(models.BuddyPreference, { as: 'buddie', onDelete: 'cascade'});
+    Profile.associate = (models) => {
+        Profile.hasMany(models.Image, { onDelete: 'cascade' });
+        Profile.belongsTo(models.Image, { as: 'profile_picture', constraints: false });
+
+        Profile.hasMany(models.BuddyPreference, { onDelete: 'cascade' });
+
+        Profile.hasMany(models.Message, { foreignKey: 'senderid', onDelete: 'cascade' });
+        
+        Profile.hasMany(models.BuddyList, { onDelete: 'cascade' });
+        Profile.belongsToMany(models.BuddyList, { through: 'ProfileToBuddyList' });
     };
 
     return Profile;
-}
+};

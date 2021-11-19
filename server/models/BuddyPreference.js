@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
 
-    const BuddiePreference = sequelize.define("BuddiePreference", {
+    const BuddyPreference = sequelize.define("BuddyPreference", {
         type: {
             // species, type, age, disposition
             type: DataTypes.STRING,
@@ -8,10 +8,10 @@ module.exports = (sequelize, DataTypes) => {
         },
         preference: {
             // e.g. when type species -> dog
-            type: DataTypes.STING,
+            type: DataTypes.STRING,
             allowNull: false
         }
     });
 
-    return BuddiePreference;
-}
+    return BuddyPreference;
+};
