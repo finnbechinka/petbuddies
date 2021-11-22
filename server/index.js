@@ -1,12 +1,17 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
-const db = require('./models')
+app.use(express.json());
 
-const port = 3001
+const db = require('./models');
+
+const profileRouter = require('./routes/Profile');
+app.use('/profile', profileRouter);
+
+const port = 3001;
 
 db.sequelize.sync().then(() => {
     app.listen(port, () =>{
         console.log('server running on port %d', port)
-    })
-})
+    });
+});
