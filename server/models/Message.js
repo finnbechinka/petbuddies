@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(3000),
             allowNull: false
         }
-    });
+    }, { freezeTableName: true });
 
     Message.associate = (models) => {
         Message.belongsTo(models.Profile, { as: 'recipient' });
