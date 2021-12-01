@@ -16,8 +16,8 @@ function Register() {
   });
 
   const onSubmit = (data) => {
-    axios.post("http://localhost:3001/auth", data).then(() => {
-      console.log(data);
+    axios.post("http://localhost:3001/auth", data).then((res) => {
+      console.log(res.data);
     });
   };
 
