@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         type: {
             // privat, institution, verwalter
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         }
     }, { freezeTableName: true });
 
