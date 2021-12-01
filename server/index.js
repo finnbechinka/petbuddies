@@ -15,11 +15,14 @@ const buddypreferenceRouter = require('./routes/BuddyPreference');
 app.use('/buddypreference', buddypreferenceRouter);
 const buddylistRouter = require('./routes/BuddyList');
 app.use('/buddylist', buddylistRouter);
+const userRouter = require('./routes/User');
+app.use('/auth', userRouter);
+
 
 const port = 3001;
 
 db.sequelize.sync().then(() => {
     app.listen(port, () =>{
-        console.log('server running on port %d', port)
+        console.log('server running on port %d', port);
     });
 });
