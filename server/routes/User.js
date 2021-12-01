@@ -5,14 +5,19 @@ const bcrypt = require('bcrypt');
 
 router.post('/', async (req, res) => {
     const {username, password, type} = req.body;
-    bcrypt.hash(password, 10).then((hash) => {
-        User.create({
-            username: username,
-            password: hash,
-            type: type
+    const user = await User.findOne({ where: {username: username}});
+    if(!user){
+        bcrypt.hash(password, 10).then((hash) => {
+            User.create({
+                username: username,
+                password: hash,
+                type: type
+            });
+            res.json("SUCCESS");
         });
-        res.json('SUCCESS');
-    });
+    }else{
+        res.json({error: "username is taken"});
+    }
 });
 
 router.post('/login', async (req, res) =>{
