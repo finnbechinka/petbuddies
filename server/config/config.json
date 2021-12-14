@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Server+123",
+    "password": "server+123",
     "database": "petbuddiesdb",
     "host": "localhost",
     "dialect": "mysql"

@@ -1,14 +1,18 @@
 import './App.css';
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
+import {AuthContext} from "./helpers/AuthContext";
+import {useState, useEffect} from 'react';
+import axios from "axios";
+
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
-import {AuthContext} from "./helpers/AuthContext";
-import {useState, useEffect} from 'react'
-import axios from "axios";
+import Profile from "./pages/Profile";
+import ProfileOverview from './pages/ProfileOverview';
 
 function App() {
   const [authState, setAuthState] = useState({username: "", id: 0, status: false});
+
   useEffect(() =>{
     axios.get("http://localhost:3001/auth/auth", {headers: {accessToken: localStorage.getItem("accessToken"),},}).then((response) =>{
       if(response.data.error){
@@ -22,6 +26,7 @@ function App() {
   const logout = () =>{
     localStorage.removeItem("accessToken");
     setAuthState({username: "", id: 0, status: false});
+    window.location.href='/';
   }
   return (
     <div className="App">
@@ -34,6 +39,11 @@ function App() {
                 <>
                   <Link to="/login"> Login</Link>
                   <Link to="/register"> Register</Link>
+                </>
+              )}
+              {authState.status && (
+                <>
+                  <Link to="/myprofiles">My Profiles</Link>
                 </>
               )}
             </div>
@@ -50,6 +60,8 @@ function App() {
             <Route path="/" element={<Home/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/profile/:id" element={<Profile/>}/>
+            <Route path="/myprofiles" element={<ProfileOverview/>}/>
           </Routes>
         </Router>
       </AuthContext.Provider>

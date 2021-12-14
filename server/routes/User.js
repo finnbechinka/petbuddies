@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { User } = require('../models');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const {validateToken} = require('../middlewares/AuthMiddleware')
 const {sign} = require('jsonwebtoken');
 
@@ -26,17 +26,23 @@ router.post('/login', async (req, res) =>{
     const {username, password} = req.body;
 
     const user = await User.findOne({ where: {username: username}});
-    if(!user) res.json({error: "no such user"});
-    bcrypt.compare(password, user.password).then((match) => {
-        if(!match) res.json({error: "wrong password"});
-
-        const accessToken = sign({username: user.username, id: user.id}, "secret");
-
-        res.json({token: accessToken, username: user.username, id: user.id});
-    });
+    if(!user){
+        res.json({error: "no such user"});
+    }else{
+        bcrypt.compare(password, user.password).then((match) => {
+            if(!match){
+                res.json({error: "wrong password"});
+            }else{
+                const accessToken = sign({username: user.username, id: user.id}, "secret");
+                res.json({token: accessToken, username: user.username, id: user.id});
+            }
+        });
+    }
+    
 });
 
 router.get('/auth', validateToken, (req, res) =>{
+    console.log("auth called");
     res.json(req.user);
 });
 

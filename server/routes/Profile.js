@@ -13,4 +13,10 @@ router.post('/', async (req, res) => {
     res.json(profile);
 });
 
+router.post('/getmyprofiles', async (req, res) => {
+    const {id} = req.body;
+    const profiles = await Profile.findAll({ where: {UserId: id}});
+    res.json(profiles);
+});
+
 module.exports = router;
