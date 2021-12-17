@@ -1,7 +1,7 @@
 import './App.css';
 import {BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
-import {AuthContext} from "./helpers/AuthContext";
-import {useState, useEffect} from 'react';
+//import {AuthContext} from "./helpers/AuthContext";
+import {useState, useEffect, createContext } from 'react';
 import axios from "axios";
 
 import Register from "./pages/Register";
@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import ProfileOverview from './pages/ProfileOverview';
+
+export const AuthContext = createContext();
 
 function App() {
   const [authState, setAuthState] = useState({username: "", id: 0, status: false});

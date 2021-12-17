@@ -17,6 +17,9 @@ function Register() {
 
   const onSubmit = (data) => {
     axios.post("http://localhost:3001/auth", data).then((res) => {
+      if(res.data.error){
+        alert(res.data.error);
+      }
       console.log(res.data);
     });
   };
