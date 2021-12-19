@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import ProfileOverview from './pages/ProfileOverview';
+import CreateProfile from './pages/CreateProfile';
+import EditProfile from './pages/EditProfile';
 
 export const AuthContext = createContext();
 
@@ -39,21 +41,22 @@ function App() {
               <Link to="/"> Home</Link>
               {!authState.status && (
                 <>
-                  <Link to="/login"> Login</Link>
-                  <Link to="/register"> Register</Link>
+                  <Link to="/login"> Anmelden</Link>
+                  <Link to="/register"> Registrieren</Link>
                 </>
               )}
               {authState.status && (
                 <>
-                  <Link to="/myprofiles">My Profiles</Link>
+                  <Link to="/myprofiles">Meine Profile</Link>
+                  <Link to="/createprofile">Profil erstellen</Link>
                 </>
               )}
             </div>
             <div className="loggedInContainer">
               {authState.status && (
                 <>
-                  <h1>hey, {authState.username}! </h1>
-                  <button onClick={logout}> Logout</button>
+                  <h1>Hallo, {authState.username}! </h1>
+                  <button onClick={logout}> Abmelden</button>
                 </>
               )}
             </div>
@@ -64,6 +67,8 @@ function App() {
             <Route path="/register" element={<Register/>}/>
             <Route path="/profile/:id" element={<Profile/>}/>
             <Route path="/myprofiles" element={<ProfileOverview/>}/>
+            <Route path="/createprofile" element={<CreateProfile/>}/>
+            <Route path="/profile/:id/edit" element={<EditProfile/>}/>
           </Routes>
         </Router>
       </AuthContext.Provider>

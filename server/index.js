@@ -21,6 +21,7 @@ const userRouter = require('./routes/User');
 app.use('/auth', userRouter);
 
 
+
 const port = 3001;
 
 db.sequelize.sync().then(() => {

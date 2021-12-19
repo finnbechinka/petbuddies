@@ -32,12 +32,16 @@ module.exports = (sequelize, DataTypes) => {
             // gemuet
             type: DataTypes.STRING,
             allowNull: false
+        },
+        profileImg: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     }, { freezeTableName: true });
 
     Profile.associate = (models) => {
-        Profile.hasMany(models.Image, { onDelete: 'cascade' });
-        Profile.belongsTo(models.Image, { as: 'profile_picture', constraints: false });
+        //Profile.hasMany(models.Image, { onDelete: 'cascade' });
+        //Profile.belongsTo(models.Image, { as: 'profile_picture', constraints: false });
 
         Profile.hasMany(models.BuddyPreference, { onDelete: 'cascade' });
 
