@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../App";
 
 function Register() {
+  const { authState } = useContext(AuthContext);
+  let history = useNavigate();
+
   const initialValues = {
     username: "",
     password: "",
@@ -17,12 +22,18 @@ function Register() {
 
   const onSubmit = (data) => {
     axios.post("http://localhost:3001/auth", data).then((res) => {
-      if(res.data.error){
+      if (res.data.error) {
         alert(res.data.error);
       }
       console.log(res.data);
     });
   };
+
+  useEffect(() => {
+    if (authState.status == true) {
+      history("/");
+    }
+  }, []);
 
   return (
     <div>

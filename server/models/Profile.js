@@ -43,12 +43,12 @@ module.exports = (sequelize, DataTypes) => {
         //Profile.hasMany(models.Image, { onDelete: 'cascade' });
         //Profile.belongsTo(models.Image, { as: 'profile_picture', constraints: false });
 
-        Profile.hasMany(models.BuddyPreference, { onDelete: 'cascade' });
+        //Profile.hasMany(models.BuddyPreference, { onDelete: 'cascade' });
 
-        Profile.hasMany(models.Message, { foreignKey: 'senderid', onDelete: 'cascade' });
+        //Profile.hasMany(models.Message, { foreignKey: 'senderid', onDelete: 'cascade' });
         
-        Profile.hasMany(models.BuddyList, { onDelete: 'cascade' });
-        Profile.belongsToMany(models.BuddyList, { through: 'ProfileToBuddyList' });
+        //Profile.hasMany(models.BuddyList, { onDelete: 'cascade' });
+        //Profile.belongsToMany(models.BuddyList, { through: 'ProfileToBuddyList' });
     };
 
     return Profile;

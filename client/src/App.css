@@ -231,3 +231,41 @@ button {
   margin-left: 3%;
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* MESSAGE */
+
+.scroll-bg{
+  width: 600px;
+  height: 400px;
+  margin: 2% auto;
+  margin-bottom: 0%;
+}
+
+.scroll-div{
+  width: 100%;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.scroll-object{
+  color: wheat;
+  padding: 1%;
+}
+
+.messageForm .messageField{
+  background-color: rgba(127, 255, 212, 0.295);
+  margin: 1%;
+  margin-top: 2%;
+  height: 25px;
+  width: 420px;
+}
+.messageForm > button{
+  background-color: dodgerblue;
+  color: white;
+  margin: 1%;
+  margin-top: 2%;
+  height: 25px;
+  width: 150px;
+}

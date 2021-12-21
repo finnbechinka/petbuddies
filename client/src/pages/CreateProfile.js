@@ -13,11 +13,11 @@ function CreateProfile() {
         language: "german",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut lacinia ex a quam dictum tincidunt. Sed malesuada tellus ut faucibus elementum. Aenean laoreet arcu sit amet tincidunt luctus. Nullam rhoncus velit nec venenatis malesuada. Mauris id commodo sapien. In et tellus a velit facilisis mollis at quis mauris. Ut faucibus ac turpis non suscipit. Etiam sit amet velit et turpis pulvinar sodales. Fusce odio nisl, vestibulum sed enim at, finibus volutpat nisi. Praesent lacinia auctor ex id bibendum. Vestibulum turpis odio, molestie quis tristique ut, congue eu ipsum. ",
         name: "",
-        species: "dog",
+        species: "Hund",
         type: "",
         age: 0,
         UserId: authState.id,
-        disposition: "calm",
+        disposition: "Ruhig",
     };
 
     const onSubmit = (data) => {

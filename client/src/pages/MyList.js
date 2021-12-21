@@ -3,8 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../App";
 
-
-function Home() {
+function MyList() {
     const { authState } = useContext(AuthContext);
     const [listOfProfiles, setListOfProfiles] = useState([]);
     const [listOfImages, setListOfImages] = useState([]);
@@ -12,8 +11,7 @@ function Home() {
     let history = useNavigate();
 
     useEffect(() => {
-        
-        axios.post("http://localhost:3001/profile/otherprofiles", { userid: authState.id }).then((response) => {
+        axios.post("http://localhost:3001/profile/mylist", { userid: authState.id }).then((response) => {
             if (response.data.error) {
                 alert(response.data.error);
             } else {
@@ -23,15 +21,11 @@ function Home() {
                 });
             }
         });
-        if(!localStorage.getItem("accessToken")){
-            history("/login");
-        }
-        
     }, []);
 
     return (
         <div>
-            <h1>Vorgeschlagene Profile</h1>
+            <h1>Meine buddie Liste</h1>
             <div className='pOverwievWrapper'>
                 {listOfProfiles.map((value, key) => {
                     return (
@@ -53,4 +47,4 @@ function Home() {
     )
 }
 
-export default Home
+export default MyList

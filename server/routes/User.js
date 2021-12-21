@@ -42,8 +42,16 @@ router.post('/login', async (req, res) =>{
 });
 
 router.get('/auth', validateToken, (req, res) =>{
-    console.log("auth called");
+    //console.log("auth called");
     res.json(req.user);
 });
+
+router.post('/getusername', async (req, res) =>{
+    const {uid} = req.body;
+    const user = await User.findByPk(uid);
+    if(user){
+        res.json({username: user.username})
+    }
+})
 
 module.exports = router;

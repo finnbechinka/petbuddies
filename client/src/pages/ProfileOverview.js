@@ -18,35 +18,31 @@ function ProfileOverview() {
                 setListOfProfiles(response.data);
                 axios.get(`http://localhost:3001/image/`).then((res) => {
                     setListOfImages(res.data)
-            });
+                });
             }
         });
     }, []);
 
-    function getimg(id){
-        listOfImages.forEach(e => {
-            if(e.id == id){
-                setProfileImg(require("../images/" + e.file).default)
-            }
-        });
-    }
-
     return (
-        <div className='pOverwievWrapper'>
-            {listOfProfiles.map((value, key) => {
-                return (
-                    <div
-                        className="profile"
-                        onClick={() => { history(`/profile/${value.id}`) }}
-                    >
-                        <div className="title"> {value.name} </div>
-                        <div className="body">
-                            <img className="img" src={require("../images/" + value.profileImg).default} alt='profile pic'></img>
+        <div>
+            <h1>Meine Profile</h1>
+            <div className='pOverwievWrapper'>
+                {listOfProfiles.map((value, key) => {
+                    return (
+                        <div
+                            key={key}
+                            className="profile"
+                            onClick={() => { history(`/profile/${value.id}`) }}
+                        >
+                            <div className="title"> {value.name} </div>
+                            <div className="body">
+                                <img className="img" src={require("../images/" + value.profileImg).default} alt='profile pic'></img>
+                            </div>
+                            <div className="footer">{value.species}</div>
                         </div>
-                        <div className="footer">{value.species}</div>
-                    </div>
-                );
-            })}
+                    );
+                })}
+            </div>
         </div>
     )
 }

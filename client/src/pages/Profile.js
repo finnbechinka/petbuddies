@@ -8,6 +8,7 @@ function Profile() {
     let { id } = useParams();
     const [profileObj, setProfileObj] = useState({});
     const [profileImg, setProfileImg] = useState({});
+    const [isOnMyList, setisOnMyList] = useState(false);
     let history = useNavigate();
 
     useEffect(() => {
@@ -15,7 +16,21 @@ function Profile() {
             setProfileObj(res.data);
             setProfileImg(require("../images/" + res.data.profileImg).default)
         });
+
+        axios.post(`http://localhost:3001/profile/isonmylist/${id}`, {uid: authState.id}).then((res) => {   
+            setisOnMyList(res.data.status)
+            console.log(isOnMyList)
+        });
     }, []);
+
+    let addToList = () => {
+        let data = {ownerId: authState.id, buddieId: id}
+        axios.post('http://localhost:3001/profile/addtolist', data).then((res) => {
+            if(res.data.error){
+                alert(res.data.error)
+            }
+        });
+    }
 
     return (
         <div className="profilePage">
@@ -29,9 +44,19 @@ function Profile() {
                     <div><b>Alter:</b> {profileObj.age}</div>
                     <div><b>Gemuet:</b> {profileObj.disposition}</div>
                 </div>
-                {(authState.id == profileObj.UserId) && (
+                {(authState.id != profileObj.UserId && isOnMyList) && (
+                    <>
+                        <button onClick={() => history(`/message/${profileObj.UserId}`)}> Nachicht senden</button>
+                    </>
+                )}
+                {(authState.id == profileObj.UserId && !isOnMyList) && (
                     <>
                         <button onClick={() => history(`/profile/${id}/edit`)}> Profil Bearbeiten</button>
+                    </>
+                )}
+                {(authState.id != profileObj.UserId && !isOnMyList) && (
+                    <>
+                        <button onClick={addToList}> Zur Liste</button>
                     </>
                 )}
             </div>
